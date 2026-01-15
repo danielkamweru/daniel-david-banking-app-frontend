@@ -18,7 +18,7 @@ export default function Dashboard() {
   return (
     <div className="p-6 space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div className="bg-gradient-to-br from-[#64FFDA] to-[#4ECDC4] text-[#0A192F] p-6 rounded-xl shadow-lg">
+        <div className="bg-linear-to-br from-[#64FFDA] to-[#4ECDC4] text-[#0A192F] p-6 rounded-xl shadow-lg">
           <p className="text-[#0A192F]/70 text-sm font-medium">Total Balance</p>
           <h3 className="text-3xl font-bold mt-2">${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</h3>
           <p className="text-[#0A192F]/70 text-sm mt-2">Across all accounts</p>

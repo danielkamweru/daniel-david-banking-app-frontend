@@ -1,79 +1,74 @@
-# Banking App Frontend
 
-Modern banking application frontend built with React, Vite, and Tailwind CSS.
 
-## Features
+# project Name
 
-- User authentication (Login/Signup)
-- Dashboard with account overview
-- Account management
-- Money transfers
-- Transaction history
-- User settings
-- Responsive design with dark theme
+` BankApp `A modern, secure, and user-friendly banking application built with React. Manage your finances, transfer money, and track all your transactions in one place.
 
-## Tech Stack
+## Project Features
 
-- React 18
-- Vite
-- Tailwind CSS v4
-- React Router
-- Axios
-- Zustand (state management)
+*   **User Authentication:** Secure user registration and login functionality.
+*   **Dashboard:** A personalized overview of your financial status at a glance.
+*   **Account Management:** View and manage your different bank accounts.
+*   **Money Transfers:** Seamlessly transfer funds between accounts.
+*   **Transaction History:** A detailed log of all your past transactions for easy tracking.
+*   **User Settings:** Customize your account preferences and security settings.
+*   **Protected Routes:** Secure access to sensitive features like the dashboard and transfers, ensuring only logged-in users can access them.
+*   **Responsive Design:** A clean and intuitive interface that works seamlessly on desktop and mobile devices.
 
-## Backend Integration
+## Project Installation
 
-This frontend connects to the Banking App backend API running on `http://localhost:8080/api`
+To get a local copy up and running, follow these simple steps:
 
-### API Endpoints Used:
+1.  **Clone the repository:**
+    ```bash
+    git clone https://github.com/your-username/bankapp.git
+    ```
 
-- `POST /api/auth/register` - User registration
-- `POST /api/auth/login` - User login
-- `GET /api/accounts` - Get all accounts
-- `GET /api/transactions` - Get all transactions
-- `POST /api/transactions/transfer` - Transfer money
-- `GET /api/users/profile` - Get user profile
+2.  **Navigate to the project directory:**
+    ```bash
+    cd bankapp
+    ```
 
-## Setup
+3.  **Install the required dependencies:**
+    ```bash
+    npm install
+    ```
 
-1. Install dependencies:
-```bash
-npm install
-```
+4.  **Start the development server:**
+    ```bash
+    npm start
+    ```
 
-2. Configure environment variables:
-Create a `.env` file with:
-```
-VITE_API_URL=http://localhost:8080/api
-```
+    The application will open in your default browser at `http://localhost:3000`.
 
-3. Start the development server:
-```bash
-npm run dev
-```
+## Project Technology
 
-4. Make sure the backend is running on `http://localhost:8080`
+This project is built using the following core technologies:
 
-## Build
+*   **React.js:** A popular JavaScript library for building user interfaces.
+*   **React Router:** A standard library for routing in React applications, enabling navigation between different pages.
+*   **JavaScript (ES6+):** Utilizing modern JavaScript features for clean and efficient code.
+*   **Component-Based Architecture:** The application is structured with reusable and maintainable React components.
 
-```bash
-npm run build
-```
+## Project Usage
 
-## Project Structure
+1.  **Homepage:** Visit the main landing page to learn about the app.
+2.  **Create an Account:** Click on "Signup" to register a new user account.
+3.  **Login:** Use your credentials to access your personal banking dashboard.
+4.  **Navigate:** Use the navigation menu to move between different sections:
+    *   **Dashboard:** Your financial hub.
+    *   **Accounts:** Manage your accounts.
+    *   **Transfer:** Send money to other accounts.
+    *   **Transactions:** View your complete transaction history.
+    *   **Settings:** Update your profile and security settings.
+5.  **Logout:** Securely log out of your session when you are finished.
 
-```
-src/
-├── api/           # API configuration and services
-├── components/    # Reusable components
-├── context/       # React context providers
-├── pages/         # Page components
-├── router/        # Routing configuration
-└── store/         # State management
-```
+## Author
 
-## Color Palette
+Developed by:
+*   David Kuron
+*   Daniel Kameru
 
-- Deep Navy: #0A192F (background)
-- Cyber Blue: #64FFDA (accents/CTAs)
-- White/Gray: Text and UI elements
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
