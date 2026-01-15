@@ -21,7 +21,7 @@ To get a local copy up and running, follow these simple steps:
 
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/bankapp.git
+    git clone `git@github.com:danielkamweru/daniel-david-banking-app-frontend.git`
     ```
 
 2.  **Navigate to the project directory:**
@@ -36,10 +36,81 @@ To get a local copy up and running, follow these simple steps:
 
 4.  **Start the development server:**
     ```bash
-    npm start
+    npm start or npm run dev
     ```
 
     The application will open in your default browser at `http://localhost:3000`.
+
+## projec structure
+
+Daniel-David-Banking-App-Frontend/
+├── public
+│   
+│   
+│   
+│
+├── src/
+│   ├── api/                 # For images, fonts, and other static assets
+│   │    ├── axios
+│   |    ├── services
+│   │
+│   ├── components/             # Reusable UI components
+│   │     ├── Navbar.jsx         # The ProtectedRoute logic
+│   │     ├── protectedRoute.jsx
+│   │     └── Sidebar.jsx
+│   │   
+│   │   
+│   │
+│   ├── pages/                  # Main page components for each route
+│   │   ├── Home
+│   │   │   
+│   │   |   
+│   │   ├── About
+│   │   │   
+│   │   │   
+│   │   ├── Contact
+│   │   │   
+│   │   │  
+│   │   ├── Login
+│   │   │   
+│   │   │   
+│   │   ├── Signup
+│   │   │   
+│   │   │   
+│   │   ├── Dashboard
+│   │   │   
+│   │   │   
+│   │   ├── Accounts
+│   │   │   
+│   │   │   
+│   │   ├── Transfer
+│   │   │   
+│   │   │   
+│   │   ├── Transactions
+│   │   │   
+│   │   │   
+│   │   └── Settings
+│   │       
+│   │       
+│   │
+│   ├── context/               
+│   │   ├── authcontext.jsx
+│   │   
+│   │   
+│   │
+│   ├── router/                
+│   │   ├── AppRouter.jsx         
+│   │   
+│   │
+│   ├── App.css                 # Global application styles
+│   ├── App.jsx                 # Main application component (where you'll use the router)
+│   ├── index.css               # Global CSS styles
+│   ├── index.js                # Entry point of the application
+│                 
+│
+├── .gitignore
+├── package.json
+└── README.md
 
 ## Project Technology
 
