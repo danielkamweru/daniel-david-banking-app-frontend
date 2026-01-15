@@ -48,9 +48,9 @@ export default function Login() {
     <div className="min-h-screen bg-[#0A192F] flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <Link to="/" className="text-3xl font-bold text-[#64FFDA]">BankApp</Link>
-          <h1 className="mt-6 text-3xl font-bold text-white">Welcome back</h1>
-          <p className="mt-2 text-gray-400">Sign in to your account</p>
+          <Link to="/" className="text-3xl font-bold text-blue-700 ">BankApp</Link>
+          <h1 className="mt-6 text-3xl font-bold text-blue-700">Welcome back</h1>
+          <p className="mt-2 text-white">Sign in to your account</p>
         </div>
         
         <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl space-y-6">
@@ -70,7 +70,7 @@ export default function Login() {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#64FFDA] transition-colors ${
+              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
                 errors.email ? 'border-red-500' : 'border-white/20'
               }`}
               placeholder="Enter your email"
@@ -88,7 +88,7 @@ export default function Login() {
               type="password"
               value={formData.password}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#64FFDA] transition-colors ${
+              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
                 errors.password ? 'border-red-500' : 'border-white/20'
               }`}
               placeholder="Enter your password"
@@ -99,14 +99,14 @@ export default function Login() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#64FFDA] text-[#0A192F] py-3 px-4 rounded-lg font-semibold hover:shadow-[0_0_20px_rgba(100,255,218,0.5)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="w-full bg-blue-700 text-[#0A192F] py-3 px-4 rounded-lg font-semibold hover:shadow-[0_0_20px_rgba(100,255,218,0.5)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
             {isLoading ? 'Signing in...' : 'Login'}
           </button>
 
-          <p className="text-center text-sm text-gray-400">
+          <p className="text-center text-sm text-white">
             Don't have an account?{' '}
-            <Link to="/signup" className="text-[#64FFDA] hover:underline font-medium">
+            <Link to="/signup" className="text-blue-700 hover:underline font-medium">
               Sign up
             </Link>
           </p>
