@@ -1,60 +1,27 @@
-import { Link } from 'react-router-dom'; // You need react-router-dom for this to work
-import { useAuth } from '../context/AuthContext'; // Import the auth hook
+import { useAuth } from '../context/AuthContext'
 
-/**
- * Navbar Component
- * This component provides the top navigation for the application.
- * It includes the app logo, main navigation links, and user controls.
- */
-const Navbar = () => {
-  // Get user data and logout function from the auth context
-  const { user, logout } = useAuth();
+export default function Navbar() {
+  const { user } = useAuth()
 
   return (
-    <nav className="bg-gray-800 text-white p-4 shadow-md">
-      <div className="container mx-auto flex justify-between items-center">
-        {/* App Logo / Brand Name */}
-        <div className="text-xl font-bold">
-          <Link to="/" className="hover:text-gray-300 transition-colors">Banking app</Link>
+    <nav className="bg-[#0A192F] border-b border-white/10 px-6 py-4">
+      <div className="flex justify-between items-center">
+        <div>
+          <h2 className="text-xl font-semibold text-white">Welcome back, {user?.name || 'User'}</h2>
+          <p className="text-sm text-gray-400">Manage your finances with ease</p>
         </div>
 
-        {/* Navigation Links and User Controls */}
-        <div className="flex space-x-4">
-          {/* Public Navigation Links */}
-          <Link to="/" className="hover:text-gray-300 transition-colors">Home</Link>
-          <Link to="/about" className="hover:text-gray-300 transition-colors">About</Link>
-          <Link to="/contact" className="hover:text-gray-300 transition-colors">Contact</Link>
-
-          {/* Conditional Rendering based on User Authentication */}
-          {user ? (
-            <>
-              {/* If user is logged in, show their balance and a logout button */}
-              <Link 
-                to="/account-balance" 
-                className="hover:text-gray-300 transition-colors"
-              >
-                Balance: ${user.accountBalance.toFixed(2)}
-              </Link>
-              <button 
-                onClick={logout} 
-                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition-colors"
-              >
-                Logout
-              </button>
-            </>
-          ) : (
-            // If user is not logged in, show a login link
-            <Link 
-              to="/login" 
-              className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded transition-colors"
-            >
-              Login
-            </Link>
-          )}
+        <div className="flex items-center gap-4">
+          <button className="p-2 hover:bg-white/5 rounded-lg transition-colors">
+            <span className="text-sm text-gray-300">Notifications</span>
+          </button>
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 bg-[#64FFDA] rounded-full flex items-center justify-center text-[#0A192F] font-semibold">
+              {user?.name?.[0] || 'U'}
+            </div>
+          </div>
         </div>
       </div>
     </nav>
-  );
-};
-
-export default Navbar;
+  )
+}
