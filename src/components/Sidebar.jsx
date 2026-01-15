@@ -1,79 +1,50 @@
-import { Link, useLocation } from 'react-router-dom'; // You need react-router-dom for this to work
+import { Link, useLocation } from 'react-router-dom'
+import { useAuth } from '../context/AuthContext'
 
-/**
- * Sidebar Component
- * This component provides the vertical navigation menu for the application.
- * It highlights the currently active page.
- */
-const Sidebar = () => {
-  // Get the current URL path to determine the active link
-  const location = useLocation();
+export default function Sidebar() {
+  const location = useLocation()
+  const { logout } = useAuth()
 
-  // Helper function to check if a link is the active one
-  const isActive = (path) => location.pathname === path;
+  const navItems = [
+    { path: '/dashboard', label: 'Dashboard' },
+    { path: '/accounts', label: 'Accounts' },
+    { path: '/transfer', label: 'Transfer' },
+    { path: '/transactions', label: 'Transactions' },
+    { path: '/settings', label: 'Settings' },
+  ]
+
+  const isActive = (path) => location.pathname === path
 
   return (
-    <aside className="w-64 bg-gray-100 h-screen p-4">
-      <ul className="space-y-2">
-        {/* Dashboard Link */}
-        <li>
-          <Link 
-            to="/dashboard" 
-            // Conditionally apply the 'active' class
-            className={`block p-2 rounded transition-colors ${
-              isActive('/dashboard') 
-                ? 'bg-blue-500 text-white' 
-                : 'hover:bg-gray-200 text-gray-700'
-            }`}
-          >
-            Dashboard
-          </Link>
-        </li>
+    <aside className="w-64 bg-[#0A192F] border-r border-white/10 min-h-screen flex flex-col">
+      <div className="p-6 border-b border-white/10">
+        <h1 className="text-2xl font-bold text-[#64FFDA]">BankApp</h1>
+      </div>
 
-        {/* Settings Link */}
-        <li>
-          <Link 
-            to="/settings"
-            className={`block p-2 rounded transition-colors ${
-              isActive('/settings') 
-                ? 'bg-blue-500 text-white' 
-                : 'hover:bg-gray-200 text-gray-700'
+      <nav className="flex-1 p-4 space-y-2">
+        {navItems.map((item) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
+              isActive(item.path)
+                ? 'bg-[#64FFDA]/10 text-[#64FFDA] font-medium'
+                : 'text-gray-300 hover:bg-white/5'
             }`}
           >
-            Settings
+            <span>{item.label}</span>
           </Link>
-        </li>
+        ))}
+      </nav>
 
-        {/* Transfer Link */}
-        <li>
-          <Link 
-            to="/transfer"
-            className={`block p-2 rounded transition-colors ${
-              isActive('/transfer') 
-                ? 'bg-blue-500 text-white' 
-                : 'hover:bg-gray-200 text-gray-700'
-            }`}
-          >
-            Transfer
-          </Link>
-        </li>
-
-        {/* Transactions Link */}
-        <li>
-          <Link 
-            to="/transactions"
-            className={`block p-2 rounded transition-colors ${
-              isActive('/transactions') 
-                ? 'bg-blue-500 text-white' 
-                : 'hover:bg-gray-200 text-gray-700'
-            }`}
-          >
-            Transactions
-          </Link>
-        </li>
-      </ul>
+      <div className="p-4 border-t border-white/10">
+        <button
+          onClick={logout}
+          className="w-full flex items-center gap-3 px-4 py-3 text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
+        >
+          <span>Logout</span>
+        </button>
+      </div>
     </aside>
-  );
-};
-
-export default Sidebar;
+  )
+}
