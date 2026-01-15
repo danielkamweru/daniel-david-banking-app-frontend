@@ -45,9 +45,9 @@ export default function Signup() {
     <div className="min-h-screen bg-[#0A192F] flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <Link to="/" className="text-3xl font-bold text-[#64FFDA]">BankApp</Link>
-          <h1 className="mt-6 text-3xl font-bold text-white">Create account</h1>
-          <p className="mt-2 text-gray-400">Join us to get started</p>
+          <Link to="/" className="text-3xl font-bold text-blue-700">BankApp</Link>
+          <h1 className="mt-6 text-3xl font-bold text-blue-700">Create account</h1>
+          <p className="mt-2 text-white">Join us to get started</p>
         </div>
         
         <form onSubmit={handleSubmit} className="bg-white/5 backdrop-blur-sm border border-white/10 p-8 rounded-2xl space-y-6">
@@ -58,7 +58,7 @@ export default function Signup() {
           )}
           
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-white mb-2">
+            <label htmlFor="name" className="block text-sm font-medium text-white b-2">
               Full Name
             </label>
             <input
@@ -67,7 +67,7 @@ export default function Signup() {
               type="text"
               value={formData.name}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#64FFDA] transition-colors ${
+              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
                 errors.name ? 'border-red-500' : 'border-white/20'
               }`}
               placeholder="Enter your full name"
@@ -85,7 +85,7 @@ export default function Signup() {
               type="email"
               value={formData.email}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#64FFDA] transition-colors ${
+              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
                 errors.email ? 'border-red-500' : 'border-white/20'
               }`}
               placeholder="Enter your email"
@@ -103,7 +103,7 @@ export default function Signup() {
               type="password"
               value={formData.password}
               onChange={handleChange}
-              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#64FFDA] transition-colors ${
+              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
                 errors.password ? 'border-red-500' : 'border-white/20'
               }`}
               placeholder="Create a password"
@@ -115,14 +115,14 @@ export default function Signup() {
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full bg-[#64FFDA] text-[#0A192F] py-3 px-4 rounded-lg font-semibold hover:shadow-[0_0_20px_rgba(100,255,218,0.5)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="w-full bg-blue-700 text-[#0A192F] py-3 px-4 rounded-lg font-semibold hover:shadow-[0_0_20px_rgba(100,255,218,0.5)] disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
             {isLoading ? 'Creating account...' : 'Create Account'}
           </button>
 
           <p className="text-center text-sm text-gray-400">
             Already have an account?{' '}
-            <Link to="/login" className="text-[#64FFDA] hover:underline font-medium">
+            <Link to="/login" className="text-blue-700 hover:underline font-medium">
               Login
             </Link>
           </p>
