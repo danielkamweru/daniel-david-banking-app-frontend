@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
-import { authService } from '../api/services'
+import { authService, userService } from '../api/services'
 
 export default function Login() {
-  const [formData, setFormData] = useState({ email: '', password: '' })
+  const [formData, setFormData] = useState({ email: '', pin: '' })
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth()
@@ -19,16 +19,18 @@ export default function Login() {
     if (!formData.email) newErrors.email = 'Email is required'
     else if (!validateEmail(formData.email)) newErrors.email = 'Invalid email format'
     
-    if (!formData.password) newErrors.password = 'Password is required'
+    if (!formData.pin) newErrors.pin = 'PIN is required'
     
     setErrors(newErrors)
     if (Object.keys(newErrors).length === 0) {
       setIsLoading(true)
       try {
         const response = await authService.login(formData)
-        const { token, user } = response.data
-        localStorage.setItem('token', token)
-        login(user)
+        const { access_token } = response.data
+        localStorage.setItem('token', access_token)
+        // Fetch user profile
+        const userResponse = await userService.getProfile()
+        login(userResponse.data)
         navigate('/dashboard')
       } catch (error) {
         setErrors({ general: error.response?.data?.message || 'Login failed. Please try again.' })
@@ -48,7 +50,7 @@ export default function Login() {
     <div className="min-h-screen bg-[#0A192F] flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <Link to="/" className="text-3xl font-bold text-blue-700 ">BankApp</Link>
+          <Link to="/" className="text-3xl font-bold text-blue-700 ">GROUP-8 -BANKING APP</Link>
           <h1 className="mt-6 text-3xl font-bold text-blue-700">Welcome back</h1>
           <p className="mt-2 text-white">Sign in to your account</p>
         </div>
@@ -79,21 +81,21 @@ export default function Login() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
-              Password
+            <label htmlFor="pin" className="block text-sm font-medium text-white mb-2">
+              PIN
             </label>
             <input
-              id="password"
-              name="password"
+              id="pin"
+              name="pin"
               type="password"
-              value={formData.password}
+              value={formData.pin}
               onChange={handleChange}
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
-                errors.password ? 'border-red-500' : 'border-white/20'
+                errors.pin ? 'border-red-500' : 'border-white/20'
               }`}
-              placeholder="Enter your password"
+              placeholder="Enter your PIN"
             />
-            {errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p>}
+            {errors.pin && <p className="mt-1 text-sm text-red-400">{errors.pin}</p>}
           </div>
 
           <button

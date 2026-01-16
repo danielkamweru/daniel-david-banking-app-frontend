@@ -1,31 +1,39 @@
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { useNotifications } from '../context/NotificationContext'
 import { authService } from '../api/services'
 
 export default function Signup() {
-  const [formData, setFormData] = useState({ name: '', email: '', password: '' })
+  const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '', pin: '' })
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
+  const { addNotification } = useNotifications()
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
-  const validatePassword = (password) => password.length >= 8
+  const validatePin = (pin) => /^\d{4}$/.test(pin)
 
   const handleSubmit = async (e) => {
     e.preventDefault()
     const newErrors = {}
-    
-    if (!formData.name) newErrors.name = 'Name is required'
+
+    if (!formData.first_name) newErrors.first_name = 'First name is required'
+    if (!formData.last_name) newErrors.last_name = 'Last name is required'
     if (!formData.email) newErrors.email = 'Email is required'
     else if (!validateEmail(formData.email)) newErrors.email = 'Invalid email format'
-    if (!formData.password) newErrors.password = 'Password is required'
-    else if (!validatePassword(formData.password)) newErrors.password = 'Password must be at least 8 characters'
-    
+    if (!formData.pin) newErrors.pin = 'PIN is required'
+    else if (!validatePin(formData.pin)) newErrors.pin = 'PIN must be 4 digits'
+
     setErrors(newErrors)
     if (Object.keys(newErrors).length === 0) {
       setIsLoading(true)
       try {
         await authService.register(formData)
+        addNotification({
+          type: 'success',
+          title: 'Account Created',
+          message: 'Welcome! Your account has been created successfully. Welcome email sent.'
+        })
         navigate('/login')
       } catch (error) {
         setErrors({ general: error.response?.data?.message || 'Registration failed. Please try again.' })
@@ -45,7 +53,7 @@ export default function Signup() {
     <div className="min-h-screen bg-[#0A192F] flex items-center justify-center px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <Link to="/" className="text-3xl font-bold text-blue-700">BankApp</Link>
+          <Link to="/" className="text-3xl font-bold text-blue-700">GROUP-8 -BANKING APP</Link>
           <h1 className="mt-6 text-3xl font-bold text-blue-700">Create account</h1>
           <p className="mt-2 text-white">Join us to get started</p>
         </div>
@@ -58,21 +66,39 @@ export default function Signup() {
           )}
           
           <div>
-            <label htmlFor="name" className="block text-sm font-medium text-white b-2">
-              Full Name
+            <label htmlFor="first_name" className="block text-sm font-medium text-white mb-2">
+              First Name
             </label>
             <input
-              id="name"
-              name="name"
+              id="first_name"
+              name="first_name"
               type="text"
-              value={formData.name}
+              value={formData.first_name}
               onChange={handleChange}
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
-                errors.name ? 'border-red-500' : 'border-white/20'
+                errors.first_name ? 'border-red-500' : 'border-white/20'
               }`}
-              placeholder="Enter your full name"
+              placeholder="Enter your first name"
             />
-            {errors.name && <p className="mt-1 text-sm text-red-400">{errors.name}</p>}
+            {errors.first_name && <p className="mt-1 text-sm text-red-400">{errors.first_name}</p>}
+          </div>
+
+          <div>
+            <label htmlFor="last_name" className="block text-sm font-medium text-white mb-2">
+              Last Name
+            </label>
+            <input
+              id="last_name"
+              name="last_name"
+              type="text"
+              value={formData.last_name}
+              onChange={handleChange}
+              className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
+                errors.last_name ? 'border-red-500' : 'border-white/20'
+              }`}
+              placeholder="Enter your last name"
+            />
+            {errors.last_name && <p className="mt-1 text-sm text-red-400">{errors.last_name}</p>}
           </div>
 
           <div>
@@ -94,22 +120,22 @@ export default function Signup() {
           </div>
 
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-white mb-2">
-              Password
+            <label htmlFor="pin" className="block text-sm font-medium text-white mb-2">
+              PIN
             </label>
             <input
-              id="password"
-              name="password"
+              id="pin"
+              name="pin"
               type="password"
-              value={formData.password}
+              value={formData.pin}
               onChange={handleChange}
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
-                errors.password ? 'border-red-500' : 'border-white/20'
+                errors.pin ? 'border-red-500' : 'border-white/20'
               }`}
-              placeholder="Create a password"
+              placeholder="Enter 4-digit PIN"
             />
-            {errors.password && <p className="mt-1 text-sm text-red-400">{errors.password}</p>}
-            <p className="mt-1 text-xs text-gray-400">Must be at least 8 characters</p>
+            {errors.pin && <p className="mt-1 text-sm text-red-400">{errors.pin}</p>}
+            <p className="mt-1 text-xs text-gray-400">Must be 4 digits</p>
           </div>
 
           <button

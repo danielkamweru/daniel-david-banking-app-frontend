@@ -1,27 +1,19 @@
 import api from './axios'
 
 export const authService = {
-  register: (data) => api.post('/auth/register', data),
-  login: (data) => api.post('/auth/login', data),
-  logout: () => api.post('/auth/logout')
-}
-
-export const accountService = {
-  getAll: () => api.get('/accounts'),
-  getById: (id) => api.get(`/accounts/${id}`),
-  create: (data) => api.post('/accounts', data),
-  update: (id, data) => api.put(`/accounts/${id}`, data),
-  delete: (id) => api.delete(`/accounts/${id}`)
+  register: (data) => api.post('/auth/signup', data),
+  login: (data) => api.post('/auth/login', data)
 }
 
 export const transactionService = {
   getAll: () => api.get('/transactions'),
-  getByAccountId: (accountId) => api.get(`/transactions/account/${accountId}`),
-  create: (data) => api.post('/transactions', data),
-  transfer: (data) => api.post('/transactions/transfer', data)
+  transfer: (data) => api.post('/transactions/transfer', data),
+  deposit: (data) => api.post('/transactions/deposit', data)
 }
 
 export const userService = {
-  getProfile: () => api.get('/users/profile'),
-  updateProfile: (data) => api.put('/users/profile', data)
+  getProfile: () => api.get('/users/me'),
+  updateProfile: (data) => api.put('/users/me', data),
+  resetPin: (data) => api.patch('/users/me/reset-pin', data),
+  deleteAccount: () => api.delete('/users/me')
 }

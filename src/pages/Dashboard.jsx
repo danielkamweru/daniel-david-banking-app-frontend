@@ -20,19 +20,19 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <div className="bg-linear-to-br from-[#64FFDA] to-[#4ECDC4] text-[#0A192F] p-6 rounded-xl shadow-lg">
           <p className="text-[#0A192F]/70 text-sm font-medium">Total Balance</p>
-          <h3 className="text-3xl font-bold mt-2">${totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</h3>
+          <h3 className="text-3xl font-bold mt-2">KSH {totalBalance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</h3>
           <p className="text-[#0A192F]/70 text-sm mt-2">Across all accounts</p>
         </div>
 
         <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl">
           <p className="text-gray-400 text-sm">Monthly Income</p>
-          <h3 className="text-3xl font-bold text-white mt-2">$5,000.00</h3>
+          <h3 className="text-3xl font-bold text-white mt-2">KSH 5,000.00</h3>
           <p className="text-green-400 text-sm mt-2">↑ 12% from last month</p>
         </div>
 
         <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl">
           <p className="text-gray-400 text-sm">Monthly Expenses</p>
-          <h3 className="text-3xl font-bold text-white mt-2">$2,315.49</h3>
+          <h3 className="text-3xl font-bold text-white mt-2">KSH 2,315.49</h3>
           <p className="text-red-400 text-sm mt-2">↑ 8% from last month</p>
         </div>
       </div>
@@ -48,7 +48,7 @@ export default function Dashboard() {
                   <p className="text-sm text-gray-400">{account.number}</p>
                 </div>
                 <div className="text-right">
-                  <p className="font-semibold text-white">${account.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
+                  <p className="font-semibold text-white">KSH {account.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
                   <p className="text-xs text-gray-400 capitalize">{account.type}</p>
                 </div>
               </div>
@@ -66,7 +66,7 @@ export default function Dashboard() {
                   <p className="text-xs text-gray-400">{transaction.date}</p>
                 </div>
                 <p className={`font-semibold ${transaction.type === 'credit' ? 'text-green-400' : 'text-white'}`}>
-                  {transaction.amount > 0 ? '+' : ''}${Math.abs(transaction.amount).toFixed(2)}
+                  {transaction.amount > 0 ? '+' : ''}KSH {Math.abs(transaction.amount).toFixed(2)}
                 </p>
               </div>
             ))}
