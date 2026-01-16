@@ -23,7 +23,7 @@ export default function Navbar() {
     <nav className="bg-[#0A192F] border-b border-white/10 px-6 py-4">
       <div className="flex justify-between items-center">
         <div>
-          <h2 className="text-xl font-semibold text-white">Welcome back, {user ? `${user.first_name} ${user.last_name}` : 'User'}</h2>
+          <h2 className="text-xl font-semibold text-white">Welcome {user ? `${user.first_name} ${user.last_name}` : 'User'}</h2>
           <p className="text-sm text-gray-400">Manage your finances with ease</p>
         </div>
 

@@ -1,4 +1,5 @@
 import { createContext, useContext, useState, useEffect } from 'react'
+import { userService } from '../api/services'
 
 const AuthContext = createContext()
 
@@ -28,8 +29,17 @@ export const AuthProvider = ({ children }) => {
     window.location.href = '/'
   }
 
+  const updateUser = async () => {
+    try {
+      const updatedUser = await userService.getProfile()
+      setUser(updatedUser)
+    } catch (error) {
+      console.error('Failed to update user:', error)
+    }
+  }
+
   return (
-    <AuthContext.Provider value={{ user, login, logout }}>
+    <AuthContext.Provider value={{ user, login, logout, updateUser }}>
       {children}
     </AuthContext.Provider>
   )

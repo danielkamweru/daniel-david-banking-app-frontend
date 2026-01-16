@@ -26,11 +26,11 @@ export default function Login() {
       setIsLoading(true)
       try {
         const response = await authService.login(formData)
-        const { access_token } = response.data
+        const { access_token } = response
         localStorage.setItem('token', access_token)
         // Fetch user profile
         const userResponse = await userService.getProfile()
-        login(userResponse.data)
+        login(userResponse)
         navigate('/dashboard')
       } catch (error) {
         setErrors({ general: error.response?.data?.message || 'Login failed. Please try again.' })

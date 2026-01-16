@@ -1,19 +1,53 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
+import { useAuth } from '../context/AuthContext'
+import { transactionService } from '../api/services'
 
 export default function Dashboard() {
-  const [accounts] = useState([
-    { id: 1, name: 'Checking Account', balance: 12450.50, type: 'checking', number: '****4521' },
-    { id: 2, name: 'Savings Account', balance: 28900.00, type: 'savings', number: '****7832' },
-  ])
+  const { user } = useAuth()
+  const [accounts, setAccounts] = useState([])
+  const [recentTransactions, setRecentTransactions] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const [recentTransactions] = useState([
-    { id: 1, description: 'Salary Deposit', amount: 5000, date: '2024-01-10', type: 'credit' },
-    { id: 2, description: 'Grocery Store', amount: -125.50, date: '2024-01-09', type: 'debit' },
-    { id: 3, description: 'Electric Bill', amount: -89.99, date: '2024-01-08', type: 'debit' },
-    { id: 4, description: 'Transfer to Savings', amount: -500, date: '2024-01-07', type: 'debit' },
-  ])
+  useEffect(() => {
+    if (user?.account) {
+      setAccounts([{
+        id: 1,
+        name: 'Main Account',
+        balance: user.account.initial_balance,
+        type: 'checking',
+        number: user.account.account_number.slice(-4).padStart(user.account.account_number.length, '*')
+      }])
+    }
+  }, [user])
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const transactions = await transactionService.getAll()
+        // Transform transactions to match the expected format
+        const transformed = transactions.slice(0, 4).map(t => ({
+          id: t.id,
+          description: t.transaction_type === 'DEPOSIT' ? 'Deposit' : t.transaction_type === 'TRANSFER' ? 'Transfer' : 'Transaction',
+          amount: t.transaction_type === 'DEPOSIT' ? t.amount : -t.amount,
+          date: new Date(t.timestamp).toLocaleDateString(),
+          type: t.transaction_type === 'DEPOSIT' ? 'credit' : 'debit'
+        }))
+        setRecentTransactions(transformed)
+      } catch (error) {
+        console.error('Failed to fetch transactions:', error)
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchTransactions()
+  }, [])
 
   const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0)
+
+  if (loading) {
+    return <div className="p-6">Loading dashboard...</div>
+  }
 
   return (
     <div className="p-6 space-y-6">

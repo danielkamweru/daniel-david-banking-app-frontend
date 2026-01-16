@@ -3,7 +3,7 @@ import { useAuth } from '../context/AuthContext'
 import { userService } from '../api/services'
 
 export default function Settings() {
-  const { user, logout } = useAuth()
+  const { user, logout, updateUser } = useAuth()
   const [profile, setProfile] = useState({
     first_name: user?.first_name || '',
     last_name: user?.last_name || '',
@@ -20,8 +20,8 @@ export default function Settings() {
     setIsUpdating(true)
     try {
       await userService.updateProfile(profile)
+      await updateUser() // Update user data in context
       alert('Profile updated successfully!')
-      window.location.reload() // Refresh to get updated user data
     } catch (error) {
       setErrors({ profile: error.response?.data?.detail || 'Failed to update profile' })
     } finally {

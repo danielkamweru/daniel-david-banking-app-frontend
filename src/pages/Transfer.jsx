@@ -10,7 +10,7 @@ export default function Transfer() {
   })
   const [isLoading, setIsLoading] = useState(false)
   const [errors, setErrors] = useState({})
-  const { user } = useAuth()
+  const { user, updateUser } = useAuth()
   const { addNotification } = useNotifications()
 
   const handleSubmit = async (e) => {
@@ -25,6 +25,7 @@ export default function Transfer() {
       setIsLoading(true)
       try {
         await transactionService.transfer(formData)
+        await updateUser()
         addNotification({
           type: 'success',
           title: 'Transfer Successful',

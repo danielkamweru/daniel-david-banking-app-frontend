@@ -4,7 +4,7 @@ import { useNotifications } from '../context/NotificationContext'
 import { transactionService } from '../api/services'
 
 export default function Accounts() {
-  const { user } = useAuth()
+  const { user, updateUser } = useAuth()
   const [depositAmount, setDepositAmount] = useState('')
   const [isDepositing, setIsDepositing] = useState(false)
   const [errors, setErrors] = useState({})
@@ -20,14 +20,13 @@ export default function Accounts() {
     setIsDepositing(true)
     try {
       await transactionService.deposit({ amount })
+      await updateUser()
       addNotification({
         type: 'success',
         title: 'Deposit Successful',
         message: 'KSH ' + amount + ' deposited successfully. Confirmation email sent.'
       })
       setDepositAmount('')
-      // Refresh user data or update balance
-      window.location.reload() // Simple refresh for now
     } catch (error) {
       setErrors({ deposit: error.response?.data?.detail || 'Deposit failed' })
     } finally {

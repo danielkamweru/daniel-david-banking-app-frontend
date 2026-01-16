@@ -31,12 +31,12 @@ export default function Signup() {
         await authService.register(formData)
         addNotification({
           type: 'success',
-          title: 'Account Created',
-          message: 'Welcome! Your account has been created successfully. Welcome email sent.'
+          title: 'Account Created Successfully',
+          message: 'Your account has been created successfully. Welcome email sent. Please login to continue.'
         })
         navigate('/login')
       } catch (error) {
-        setErrors({ general: error.response?.data?.message || 'Registration failed. Please try again.' })
+        setErrors({ general: error.response?.data?.detail || error.response?.data?.message || 'Registration failed. Please try again.' })
       } finally {
         setIsLoading(false)
       }

@@ -72,9 +72,9 @@ export default function Home() {
       {/* Hero Section */}
       <div className="relative h-screen flex items-center justify-center overflow-hidden">
         <video autoPlay loop muted playsInline className="absolute inset-0 w-full h-full object-cover">
-          <source src="https://cdn.pixabay.com/video/2022/12/07/142267-779533809_large.mp4" type="video/mp4" />
+          <source src="/banking-bg.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-[#0A192F]/50"></div>
+        <div className="absolute inset-0 bg-[#0A192F]/60"></div>
         
         <div className="relative z-10 text-center px-4 max-w-5xl mx-auto">
           <p className="text-[#64FFDA] text-xl md:text-2xl font-semibold mb-4">Welcome to the Future of Banking</p>
