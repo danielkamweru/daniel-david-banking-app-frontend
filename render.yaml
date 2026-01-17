@@ -6,4 +6,4 @@ services:
     staticPublishPath: dist
     envVars:
       - key: VITE_API_URL
-        value: https://banking-app-2-eyu9.onrender.com/api
+        value: https://banking-app-2-eyu9.onrender.com
