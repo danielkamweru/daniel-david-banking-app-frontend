@@ -33,7 +33,7 @@ export default function Login() {
         login(userResponse)
         navigate('/dashboard')
       } catch (error) {
-        setErrors({ general: error.response?.data?.message || 'Login failed. Please try again.' })
+        setErrors({ general: error.response?.data?.detail || error.response?.data?.message || 'Login failed. Please try again.' })
       } finally {
         setIsLoading(false)
       }
@@ -70,6 +70,7 @@ export default function Login() {
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
               value={formData.email}
               onChange={handleChange}
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
@@ -88,6 +89,7 @@ export default function Login() {
               id="pin"
               name="pin"
               type="password"
+              autoComplete="current-password"
               value={formData.pin}
               onChange={handleChange}
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${

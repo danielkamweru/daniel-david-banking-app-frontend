@@ -73,6 +73,7 @@ export default function Signup() {
               id="first_name"
               name="first_name"
               type="text"
+              autoComplete="given-name"
               value={formData.first_name}
               onChange={handleChange}
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
@@ -91,6 +92,7 @@ export default function Signup() {
               id="last_name"
               name="last_name"
               type="text"
+              autoComplete="family-name"
               value={formData.last_name}
               onChange={handleChange}
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
@@ -109,6 +111,7 @@ export default function Signup() {
               id="email"
               name="email"
               type="email"
+              autoComplete="email"
               value={formData.email}
               onChange={handleChange}
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
@@ -129,7 +132,7 @@ export default function Signup() {
               type="password"
               value={formData.pin}
               onChange={handleChange}
-              autoComplete="current-password"
+              autoComplete="new-password"
               className={`w-full px-4 py-3 bg-white/10 border rounded-lg text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-700 transition-colors ${
                 errors.pin ? 'border-red-500' : 'border-white/20'
               }`}
