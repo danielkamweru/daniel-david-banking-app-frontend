@@ -13,6 +13,7 @@ export default function Contact() {
       title: 'Support Ticket Submitted',
       message: `${formData.name ? formData.name + ' - ' : ''}${formData.accountType ? '[' + formData.accountType + '] ' : ''}${formData.message}`
     })
+    alert('Support ticket submitted successfully!')
     setFormData({ name: '', accountType: '', message: '' })
   }
 
