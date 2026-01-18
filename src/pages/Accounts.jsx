@@ -26,6 +26,7 @@ export default function Accounts() {
         title: 'Deposit Successful',
         message: 'KSH ' + amount + ' deposited successfully. Confirmation email sent.'
       })
+      alert('Deposit successful!')
       setDepositAmount('')
     } catch (error) {
       setErrors({ deposit: error.response?.data?.detail || 'Deposit failed' })
