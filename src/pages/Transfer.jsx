@@ -31,6 +31,7 @@ export default function Transfer() {
           title: 'Transfer Successful',
           message: 'KSH ' + formData.amount + ' transferred successfully. Confirmation email sent.'
         })
+        alert('Transfer successful!')
         setFormData({ receiver_acc_number: '', amount: '' })
       } catch (error) {
         setErrors({ general: error.response?.data?.detail || 'Transfer failed. Please try again.' })
