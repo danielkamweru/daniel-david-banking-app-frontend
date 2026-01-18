@@ -1,12 +1,19 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useNotifications } from '../context/NotificationContext'
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', accountType: '', message: '' })
+  const { addNotification } = useNotifications()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('Support ticket:', formData)
+    addNotification({
+      type: 'info',
+      title: 'Support Ticket Submitted',
+      message: `${formData.name ? formData.name + ' - ' : ''}${formData.accountType ? '[' + formData.accountType + '] ' : ''}${formData.message}`
+    })
+    setFormData({ name: '', accountType: '', message: '' })
   }
 
   return (
@@ -122,7 +129,7 @@ export default function Contact() {
                   type="submit"
                   className="w-full px-6 py-3 bg-[#64FFDA] text-[#0A192F] rounded-lg font-semibold hover:shadow-[0_0_20px_rgba(100,255,218,0.5)] transition-all"
                 >
-                  Submit Ticket
+                  Submit Message
                 </button>
               </form>
             </div>

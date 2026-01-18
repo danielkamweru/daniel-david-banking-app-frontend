@@ -57,17 +57,7 @@ export default function Accounts() {
           </div>
           <p className="text-3xl font-bold text-gray-900 mb-2">KSH {account.initial_balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}</p>
           <p className="text-sm text-gray-500 mb-4">Account: {account.account_number}</p>
-          <div className="flex gap-2">
-            <button className="flex-1 bg-blue-50 text-blue-600 py-2 rounded-lg hover:bg-blue-100 transition-colors text-sm font-medium">
-              View Details
-            </button>
-            <button
-              onClick={() => window.location.href = '/transfer'}
-              className="flex-1 bg-gray-50 text-gray-700 py-2 rounded-lg hover:bg-gray-100 transition-colors text-sm font-medium"
-            >
-              Transfer
-            </button>
-          </div>
+          {/* Actions removed per request */}
         </div>
 
         <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-200">

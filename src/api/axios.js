@@ -1,8 +1,5 @@
 import axios from "axios";
-
-// ================================
-// 1️⃣ Ensure API URL is injected
-// ================================
+// 1️ Ensure API URL is injected
 const API_BASE = import.meta.env.VITE_API_URL;
 
 if (!API_BASE) {
@@ -13,9 +10,9 @@ if (!API_BASE) {
 
 console.log("Using API URL:", API_BASE); // Optional: confirm URL on page load
 
-// ================================
-// 2️⃣ Create Axios instance
-// ================================
+
+// 2️ Create Axios instance
+
 const api = axios.create({
   baseURL: API_BASE, // must include /api in VITE_API_URL
   headers: {
@@ -23,9 +20,9 @@ const api = axios.create({
   },
 });
 
-// ================================
-// 3️⃣ Add token automatically if exists
-// ================================
+
+// 3️Add token automatically if exists
+
 api.interceptors.request.use(
   (config) => {
     const token = localStorage.getItem("token");
@@ -37,9 +34,8 @@ api.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-// ================================
-// 4️⃣ Handle 401 globally
-// ================================
+// 4️ Handle 401 globally
+
 api.interceptors.response.use(
   (response) => response,
   (error) => {
@@ -53,8 +49,6 @@ api.interceptors.response.use(
     return Promise.reject(error);
   }
 );
+// 5️Export Axios instance
 
-// ================================
-// 5️⃣ Export Axios instance
-// ================================
 export default api;

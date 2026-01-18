@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { transactionService } from '../api/services'
+import { useNavigate } from 'react-router-dom'
 
 export default function Dashboard() {
   const { user } = useAuth()
+  const navigate = useNavigate()
   const [accounts, setAccounts] = useState([])
   const [recentTransactions, setRecentTransactions] = useState([])
   const [loading, setLoading] = useState(true)
@@ -111,16 +113,10 @@ export default function Dashboard() {
       <div className="bg-white/5 backdrop-blur-sm border border-white/10 p-6 rounded-xl">
         <h3 className="text-lg font-semibold text-white mb-4">Quick Actions</h3>
         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          <button className="p-4 border-2 border-white/10 rounded-lg hover:border-[#64FFDA] hover:bg-[#64FFDA]/10 transition-colors">
+          <button onClick={() => navigate('/transfer')} className="p-4 border-2 border-white/10 rounded-lg hover:border-[#64FFDA] hover:bg-[#64FFDA]/10 transition-colors">
             <span className="text-sm font-medium text-white">Transfer Money</span>
           </button>
-          <button className="p-4 border-2 border-white/10 rounded-lg hover:border-[#64FFDA] hover:bg-[#64FFDA]/10 transition-colors">
-            <span className="text-sm font-medium text-white">Pay Bills</span>
-          </button>
-          <button className="p-4 border-2 border-white/10 rounded-lg hover:border-[#64FFDA] hover:bg-[#64FFDA]/10 transition-colors">
-            <span className="text-sm font-medium text-white">View Reports</span>
-          </button>
-          <button className="p-4 border-2 border-white/10 rounded-lg hover:border-[#64FFDA] hover:bg-[#64FFDA]/10 transition-colors">
+          <button onClick={() => navigate('/settings')} className="p-4 border-2 border-white/10 rounded-lg hover:border-[#64FFDA] hover:bg-[#64FFDA]/10 transition-colors">
             <span className="text-sm font-medium text-white">Settings</span>
           </button>
         </div>
