@@ -1,3 +1,4 @@
+import { useToast } from '../context/ToastContext'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useNotifications } from '../context/NotificationContext'
@@ -5,6 +6,7 @@ import { authService } from '../api/services'
 
 export default function Signup() {
   const [formData, setFormData] = useState({ first_name: '', last_name: '', email: '', pin: '' })
+  const { showToast } = useToast()
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const [signupError, setSignupError] = useState(null)
@@ -35,6 +37,7 @@ export default function Signup() {
           title: 'Account Created Successfully',
           message: 'Your account has been created successfully. Welcome email sent. Please login to continue.'
         })
+        showToast({ title: 'Account Created', message: 'Account created successfully. Please log in to your account.', type: 'success' })
         navigate('/login')
       } catch (error) {
         setErrors({ general: error.response?.data?.detail || error.response?.data?.message || 'Registration failed. Please try again.' })

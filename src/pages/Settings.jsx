@@ -1,9 +1,11 @@
+import { useToast } from '../context/ToastContext'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { userService } from '../api/services'
 
 export default function Settings() {
   const { user, logout, updateUser } = useAuth()
+  const { showToast } = useToast()
   const [profile, setProfile] = useState({
     first_name: user?.first_name || '',
     last_name: user?.last_name || '',
@@ -21,7 +23,7 @@ export default function Settings() {
     try {
       await userService.updateProfile(profile)
       await updateUser() // Update user data in context
-      alert('Profile updated successfully!')
+      showToast({ title: 'Profile Updated', message: 'Your profile was updated successfully.', type: 'success' })
     } catch (error) {
       setErrors({ profile: error.response?.data?.detail || 'Failed to update profile' })
     } finally {
@@ -38,7 +40,7 @@ export default function Settings() {
     setIsResettingPin(true)
     try {
       await userService.resetPin({ new_pin: newPin })
-      alert('PIN reset successfully!')
+      showToast({ title: 'PIN Reset', message: 'Your PIN was reset successfully.', type: 'success' })
       setNewPin('')
     } catch (error) {
       setErrors({ pin: error.response?.data?.detail || 'Failed to reset PIN' })
@@ -54,7 +56,7 @@ export default function Settings() {
     setIsDeleting(true)
     try {
       await userService.deleteAccount()
-      alert('Account deleted successfully!')
+      showToast({ title: 'Account Deleted', message: 'Your account has been deleted.', type: 'success' })
       logout()
     } catch (error) {
       setErrors({ delete: error.response?.data?.detail || 'Failed to delete account' })

@@ -1,3 +1,4 @@
+import { useToast } from '../context/ToastContext'
 import { useState, useEffect } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNotifications } from '../context/NotificationContext'
@@ -5,6 +6,7 @@ import { transactionService } from '../api/services'
 
 export default function Transfer() {
   const [formData, setFormData] = useState({
+  const { showToast } = useToast()
     receiver_acc_number: '',
     amount: ''
   })
@@ -31,7 +33,7 @@ export default function Transfer() {
           title: 'Transfer Successful',
           message: 'KSH ' + formData.amount + ' transferred successfully. Confirmation email sent.'
         })
-        alert('Transfer successful!')
+        showToast({ title: 'Transfer Successful', message: 'Transfer completed successfully.', type: 'success' })
         setFormData({ receiver_acc_number: '', amount: '' })
       } catch (error) {
         setErrors({ general: error.response?.data?.detail || 'Transfer failed. Please try again.' })

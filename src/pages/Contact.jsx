@@ -1,9 +1,11 @@
+import { useToast } from '../context/ToastContext'
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNotifications } from '../context/NotificationContext'
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', accountType: '', message: '' })
+  const { showToast } = useToast()
   const { addNotification } = useNotifications()
 
   const handleSubmit = (e) => {
@@ -13,7 +15,7 @@ export default function Contact() {
       title: 'Support Ticket Submitted',
       message: `${formData.name ? formData.name + ' - ' : ''}${formData.accountType ? '[' + formData.accountType + '] ' : ''}${formData.message}`
     })
-    alert('Support ticket submitted successfully!')
+    showToast({ title: 'Ticket Submitted', message: 'Support ticket submitted successfully.', type: 'success' })
     setFormData({ name: '', accountType: '', message: '' })
   }
 

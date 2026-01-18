@@ -1,3 +1,4 @@
+import { useToast } from '../context/ToastContext'
 import { useState } from 'react'
 import { useAuth } from '../context/AuthContext'
 import { useNotifications } from '../context/NotificationContext'
@@ -5,6 +6,7 @@ import { transactionService } from '../api/services'
 
 export default function Accounts() {
   const { user, updateUser } = useAuth()
+  const { showToast } = useToast()
   const [depositAmount, setDepositAmount] = useState('')
   const [isDepositing, setIsDepositing] = useState(false)
   const [errors, setErrors] = useState({})
@@ -26,7 +28,7 @@ export default function Accounts() {
         title: 'Deposit Successful',
         message: 'KSH ' + amount + ' deposited successfully. Confirmation email sent.'
       })
-      alert('Deposit successful!')
+      showToast({ title: 'Deposit Successful', message: 'Deposit completed successfully.', type: 'success' })
       setDepositAmount('')
     } catch (error) {
       setErrors({ deposit: error.response?.data?.detail || 'Deposit failed' })

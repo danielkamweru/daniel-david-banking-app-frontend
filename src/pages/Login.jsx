@@ -1,3 +1,4 @@
+import { useToast } from '../context/ToastContext'
 import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
@@ -6,6 +7,7 @@ import { useNotifications } from '../context/NotificationContext'
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', pin: '' })
+  const { showToast } = useToast()
   const [errors, setErrors] = useState({})
   const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth()
@@ -43,7 +45,7 @@ export default function Login() {
           title: 'Login Successful',
           message: 'Credentials verified. You are now logged in.'
         })
-        alert('Credentials verified. You are now logged in.')
+        showToast({ title: 'Login Successful', message: 'Credentials verified. You are now logged in.', type: 'success' })
         navigate('/dashboard')
       } catch (error) {
         console.error('Login error:', error)
