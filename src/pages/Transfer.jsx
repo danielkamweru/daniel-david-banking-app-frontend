@@ -5,8 +5,8 @@ import { useNotifications } from '../context/NotificationContext'
 import { transactionService } from '../api/services'
 
 export default function Transfer() {
-  const [formData, setFormData] = useState({
   const { showToast } = useToast()
+  const [formData, setFormData] = useState({
     receiver_acc_number: '',
     amount: ''
   })
