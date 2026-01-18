@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { authService, userService } from '../api/services'
+import { useNotifications } from '../context/NotificationContext'
 
 export default function Login() {
   const [formData, setFormData] = useState({ email: '', pin: '' })
@@ -9,6 +10,7 @@ export default function Login() {
   const [isLoading, setIsLoading] = useState(false)
   const { login } = useAuth()
   const navigate = useNavigate()
+  const { addNotification } = useNotifications()
 
   const validateEmail = (email) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
 
@@ -36,6 +38,12 @@ export default function Login() {
         // Fetch user profile
         const userResponse = await userService.getProfile()
         login(userResponse)
+        addNotification({
+          type: 'success',
+          title: 'Login Successful',
+          message: 'Credentials verified. You are now logged in.'
+        })
+        alert('Credentials verified. You are now logged in.')
         navigate('/dashboard')
       } catch (error) {
         console.error('Login error:', error)
