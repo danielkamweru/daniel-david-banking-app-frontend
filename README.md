@@ -82,7 +82,6 @@ Banking-app-frontend/
 ├── LICENSE
 ├── package.json
 ├── README.md
-├── start-backend.sh
 └── vite.config.js
 ```
 
