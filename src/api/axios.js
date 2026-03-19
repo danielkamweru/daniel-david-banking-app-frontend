@@ -13,7 +13,7 @@ console.log("Using API URL:", API_BASE); // Optional: confirm URL on page load
 // Fallback URLs for different environments
 const FALLBACK_URLS = {
   development: "http://localhost:8000",
-  production: "https://banking-app-2-eyu9.onrender.com"
+  production: "https://banking-app-46l2.onrender.com"
 };
 
 // 2️ Create Axios instance with retry logic
